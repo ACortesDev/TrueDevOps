@@ -57,6 +57,10 @@ echo http://argo-cd.$INGRESS_HOST.nip.io
 echo "admin:admin123"
 
 
+kubectl apply -f argocd_setup.yaml
+
+
+vela addon enable velaux domain="velaux.$INGRESS_HOST.nip.io"
 
 # Shutdown
 # k3d cluster delete mycluster
