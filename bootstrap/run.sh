@@ -1,9 +1,5 @@
 #!/bin/bash
 
-export REPO_URL=https://github.com/ACortesDev/TrueDevOps
-export AWS_ACCESS_KEY_ID=[...]
-export AWS_SECRET_ACCESS_KEY=[...]
-
 # Init
 ###################################################
 # 1. Get a local cluster to use as a control plane
@@ -59,8 +55,12 @@ echo "admin:admin123"
 
 kubectl apply -f argocd_setup.yaml
 
+##############
+# KubeVela UX
+##############
+vela addon enable velaux serviceType=NodePort
 
-vela addon enable velaux domain="velaux.$INGRESS_HOST.nip.io"
+vela status addon-velaux -n vela-system --endpoint
 
 # Shutdown
 # k3d cluster delete mycluster
