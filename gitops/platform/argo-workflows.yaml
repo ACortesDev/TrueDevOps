@@ -8,14 +8,16 @@ metadata:
 spec:
   project: default
   source:
-    path: gitops/workflows
+    path: gitops/platform/argo-workflows
     repoURL: https://github.com/ACortesDev/TrueDevOps
     targetRevision: HEAD
   destination:
-    namespace: kube-system
+    namespace: argo
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
       allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true

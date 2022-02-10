@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/TrueDevOps
     targetRevision: HEAD
-    path: gitops/config
+    path: gitops/platform
   destination:
     server: https://kubernetes.default.svc
     namespace: default
