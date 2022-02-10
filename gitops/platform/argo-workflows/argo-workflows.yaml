@@ -602,7 +602,9 @@ spec:
     spec:
       containers:
       - args:
-        - server --auth-mode server
+        - server
+        - --auth-mode
+        - server
         image: quay.io/argoproj/argocli:v3.2.8
         name: argo-server
         ports:
