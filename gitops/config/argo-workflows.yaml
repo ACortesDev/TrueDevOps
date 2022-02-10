@@ -14,7 +14,7 @@ spec:
     helm:
       parameters:
       - name: server.extraArgs
-        value: "[--auth-mode=server]"
+        value: "[\"--auth-mode=server\"]"
   destination:
     namespace: argo
     server: https://kubernetes.default.svc
