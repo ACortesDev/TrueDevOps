@@ -565,10 +565,12 @@ kind: Service
 metadata:
   name: argo-server
 spec:
+  type: NodePort
   ports:
   - name: web
     port: 2746
     targetPort: 2746
+    nodePort: 30007
   selector:
     app: argo-server
 ---
@@ -602,8 +604,6 @@ spec:
     spec:
       containers:
       - args:
-        - server
-        - --auth-mode
         - server
         image: quay.io/argoproj/argocli:v3.2.8
         name: argo-server
