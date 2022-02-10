@@ -11,8 +11,12 @@ spec:
     chart: argo-workflows
     repoURL: https://argoproj.github.io/argo-helm
     targetRevision: "0.10.0"
+    helm:
+      parameters:
+      - name: server.extraArgs
+        value: [--auth-mode=server]
   destination:
-    namespace: argo-workflows
+    namespace: argo
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
