@@ -12,12 +12,10 @@ spec:
     repoURL: https://github.com/ACortesDev/TrueDevOps
     targetRevision: HEAD
   destination:
-    namespace: argo
+    namespace: kube-system
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
       allowEmpty: true
-    syncOptions:
-    - CreateNamespace=true

@@ -62,7 +62,7 @@ vela addon enable velaux serviceType=NodePort
 
 vela status addon-velaux -n vela-system --endpoint
 
-kubectl -n argo-workflows port-forward deployment/argoworkflows-argo-workflows-server 2746:2746
+kubectl -n argo port-forward deployment/argoworkflows-argo-workflows-server 2746:2746
 
 # Shutdown
 # k3d cluster delete mycluster
