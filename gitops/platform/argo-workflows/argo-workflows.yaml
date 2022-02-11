@@ -569,7 +569,7 @@ spec:
   ports:
   - name: web
     targetPort: 2746
-    port: 2746
+    port: 80
     nodePort: 30007
   selector:
     app: argo-server
