@@ -604,13 +604,12 @@ spec:
       - args:
         - server
         - --namespaced
+        - --insecure-skip-tls-verify
+        - --insecure-skip-verify
         - --auth-mode
         - server
         - --auth-mode
         - client
-        - --secure=false
-        - --insecure-skip-tls-verify
-        - --insecure-skip-verify
         image: quay.io/argoproj/argocli:v3.2.8
         name: argo-server
         ports:
