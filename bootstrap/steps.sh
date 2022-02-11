@@ -1,3 +1,4 @@
+####################################################
 # Requirements:
 #   - kubectl 
 #   - helm
@@ -7,6 +8,7 @@
 #   - vela (KubeVela cli)
 #   - kubeseal (bitnami sealed-secrets cli)
 #
+
 
 ###################################################
 # 1. Get a local cluster to use as a control plane
@@ -61,24 +63,48 @@ argocd account update-password \
 echo http://argo-cd.$BASE_HOST
 echo "admin:admin123"
 
-kubectl apply -f bootstrap/platform.yaml
+##########################
+# Setup Secrets and Hosts
+##########################
+echo "CHECK OUT gitops/platform/argo-workflows.yaml HOST!!!"
+echo http://argo-workflows.$BASE_HOST
 
-#################
 # Sealed Secrets
-#################
-export TEST_STRING=hello
+kubectl --namespace argo \
+    create secret \
+    docker-registry regcred \
+    --docker-server=$REGISTRY_SERVER \
+    --docker-username=$REGISTRY_USER \
+    --docker-password=$REGISTRY_PASS \
+    --docker-email=$REGISTRY_EMAIL \
+    --output json \
+    --dry-run=client \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee gitops/platform/secrets/registry.yaml
+
 
 echo "apiVersion: v1
 kind: Secret
 metadata:
   name: github-access
-  namespace: argo-events
+  namespace: argo
 type: Opaque
 data:
-  token: $(echo -n $TEST_STRING | base64)" \
+  token: $(echo -n $GH_TOKEN | base64)
+  user: $(echo -n $GH_USER | base64)
+  email: $(echo -n $GH_EMAIL | base64)" \
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
-        --format yaml
+        --format yaml \
+    | tee gitops/platform/secrets/github.yaml
+
+###############
+# GitOps Time
+###############
+kubectl apply -f bootstrap/platform.yaml
+
 
 ##############
 # KubeVela UX
@@ -86,8 +112,6 @@ data:
 vela addon enable velaux serviceType=NodePort
 
 vela status addon-velaux -n vela-system --endpoint
-
-kubectl -n argo port-forward deployment/argo-server 2746:2746
 
 # Shutdown
 k3d cluster delete mycluster
