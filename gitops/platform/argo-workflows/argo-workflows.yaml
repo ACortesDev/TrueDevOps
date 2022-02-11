@@ -608,6 +608,8 @@ spec:
         - server
         - --auth-mode
         - client
+        - --access-control-allow-origin
+        - --secure=false
         image: quay.io/argoproj/argocli:v3.2.8
         name: argo-server
         ports:
