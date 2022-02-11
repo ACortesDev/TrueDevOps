@@ -567,8 +567,8 @@ metadata:
 spec:
   ports:
   - name: web
-    port: 2746
-    targetPort: 80
+    port: 80
+    targetPort: 2746
   selector:
     app: argo-server
 ---
