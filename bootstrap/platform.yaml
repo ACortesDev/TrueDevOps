@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/ACortesDev/TrueDevOps
+    repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
     path: gitops/platform
   destination:

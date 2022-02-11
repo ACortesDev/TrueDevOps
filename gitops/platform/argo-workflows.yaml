@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: gitops/platform/argo-workflows
-    repoURL: https://github.com/ACortesDev/TrueDevOps
+    repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
   destination:
     namespace: argo
