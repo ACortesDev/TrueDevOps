@@ -14,7 +14,7 @@ items:
             service:
               name: argo-server
               port:
-                number: 2746
+                number: 80
           path: /
           pathType: Prefix
   status:
