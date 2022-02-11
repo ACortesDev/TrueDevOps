@@ -6,6 +6,19 @@
 ###################################################
 k3d cluster create mycluster
 
+# minikube start
+
+# minikube addons enable ingress
+
+# kind create cluster --config kind-config.yaml
+
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
+# kubectl wait --namespace ingress-nginx \
+#   --for=condition=ready pod \
+#   --selector=app.kubernetes.io/component=controller \
+#   --timeout=90s
+
 ################################################
 # 2. Get the external IP of the Ingress service
 ################################################
@@ -13,6 +26,11 @@ export INGRESS_HOST=$(kubectl \
     get svc traefik \
     --namespace kube-system \
     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
+
+# export INGRESS_HOST=$(kubectl \
+#     get svc ingress-nginx-controller \
+#     --namespace ingress-nginx \
+#     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
 
 ####################################
 # 3. Install ArgoCD in the cluster
@@ -66,3 +84,6 @@ kubectl -n argo port-forward deployment/argo-server 2746:2746
 
 # Shutdown
 k3d cluster delete mycluster
+
+# minikube stop
+
