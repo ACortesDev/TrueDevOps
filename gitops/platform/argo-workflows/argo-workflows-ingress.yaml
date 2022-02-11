@@ -15,7 +15,7 @@ items:
               name: argo-server
               port:
                 number: 80
-          path: /
+          path: /argo
           pathType: Prefix
   status:
     loadBalancer:
