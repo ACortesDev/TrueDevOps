@@ -604,8 +604,8 @@ spec:
       - args:
         - server
         - --namespaced
-        - --insecure-skip-tls-verify
         - --insecure-skip-verify
+        - --secure=false
         - --auth-mode
         - server
         - --auth-mode
