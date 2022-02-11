@@ -565,12 +565,10 @@ kind: Service
 metadata:
   name: argo-server
 spec:
-  type: NodePort
   ports:
   - name: web
     targetPort: 2746
-    port: 80
-    nodePort: 30007
+    port: 2746
   selector:
     app: argo-server
 ---
