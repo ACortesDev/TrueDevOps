@@ -8,15 +8,9 @@ metadata:
 spec:
   project: default
   source:
-    chart: argo-workflows
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: "0.10.1"
-    helm:
-      parameters:
-      - name: server.ingress.enabled
-        value: true
-      - name: server.ingress.hosts
-        value: "{argo-workflows.172.19.0.3.nip.io}"
+    path: gitops/platform/argo-workflows
+    repoURL: https://github.com/ACortesDev/k8s-gitops
+    targetRevision: HEAD
   destination:
     namespace: argo
     server: https://kubernetes.default.svc
