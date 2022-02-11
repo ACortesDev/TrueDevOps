@@ -1,23 +1,17 @@
-#!/bin/bash
+# Requirements:
+#   - kubectl 
+#   - helm
+#   - k3d (k3s-based k8s cluster)
+#   - argocd (Argo CD cli)
+#   - argo (Argo Workflows cli)
+#   - vela (KubeVela cli)
+#   - kubeseal (bitnami sealed-secrets cli)
+#
 
-# Init
 ###################################################
 # 1. Get a local cluster to use as a control plane
 ###################################################
 k3d cluster create mycluster
-
-# minikube start
-
-# minikube addons enable ingress
-
-# kind create cluster --config kind-config.yaml
-
-# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-
-# kubectl wait --namespace ingress-nginx \
-#   --for=condition=ready pod \
-#   --selector=app.kubernetes.io/component=controller \
-#   --timeout=90s
 
 ################################################
 # 2. Get the external IP of the Ingress service
@@ -26,11 +20,6 @@ export INGRESS_HOST=$(kubectl \
     get svc traefik \
     --namespace kube-system \
     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
-
-# export INGRESS_HOST=$(kubectl \
-#     get svc ingress-nginx-controller \
-#     --namespace ingress-nginx \
-#     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
 
 ####################################
 # 3. Install ArgoCD in the cluster
@@ -70,8 +59,25 @@ argocd account update-password \
 echo http://argo-cd.$INGRESS_HOST.nip.io
 echo "admin:admin123"
 
+kubectl apply -f bootstrap/platform.yaml
 
-kubectl apply -f argocd_setup.yaml
+#################
+# Sealed Secrets
+#################
+export TEST_STRING=hello
+
+echo "apiVersion: v1
+kind: Secret
+metadata:
+  name: github-access
+  namespace: argo-events
+type: Opaque
+data:
+  token: $(echo -n $TEST_STRING | base64)" \
+    | kubeseal \
+        --controller-namespace=sealed-secrets \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml
 
 ##############
 # KubeVela UX
@@ -84,6 +90,3 @@ kubectl -n argo port-forward deployment/argo-server 2746:2746
 
 # Shutdown
 k3d cluster delete mycluster
-
-# minikube stop
-
