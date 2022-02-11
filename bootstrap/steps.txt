@@ -21,6 +21,8 @@ export INGRESS_HOST=$(kubectl \
     --namespace kube-system \
     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
 
+export BASE_HOST="$INGRESS_HOST.nip.io"
+
 ####################################
 # 3. Install ArgoCD in the cluster
 ####################################
@@ -33,7 +35,7 @@ helm upgrade --install \
     argocd argo/argo-cd \
     --namespace argocd \
     --create-namespace \
-    --set server.ingress.hosts="{argo-cd.$INGRESS_HOST.nip.io}" \
+    --set server.ingress.hosts="{argo-cd.$BASE_HOST}" \
     --set server.ingress.enabled=true \
     --set server.extraArgs="{--insecure}" \
     --set controller.args.appResyncPeriod=30 \
@@ -50,13 +52,13 @@ argocd login \
     --username admin \
     --password $PASS \
     --grpc-web \
-    argo-cd.$INGRESS_HOST.nip.io
+    argo-cd.$BASE_HOST
 
 argocd account update-password \
     --current-password $PASS \
     --new-password admin123
 
-echo http://argo-cd.$INGRESS_HOST.nip.io
+echo http://argo-cd.$BASE_HOST
 echo "admin:admin123"
 
 kubectl apply -f bootstrap/platform.yaml
@@ -75,7 +77,6 @@ type: Opaque
 data:
   token: $(echo -n $TEST_STRING | base64)" \
     | kubeseal \
-        --controller-namespace=sealed-secrets \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml
 
