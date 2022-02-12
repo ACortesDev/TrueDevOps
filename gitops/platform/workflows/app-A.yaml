@@ -26,7 +26,7 @@ spec:
               - name: repo_url
                 value: git://github.com/ACortesDev/k8s-gitops.git
               - name: repo_ref
-                value: refs/heads/master
+                value: refs/heads/main
               - name: repo_commit_id
                 value: HEAD
               - name: container_image
