@@ -8,6 +8,8 @@
 #   - vela (KubeVela cli)
 #   - kubeseal (bitnami sealed-secrets cli)
 #
+#   - mc (minio cli)
+#
 
 
 ###################################################
@@ -123,6 +125,9 @@ k3d cluster delete mycluster
 
 # TODO:
 - Workflow that builds and pushes to DockerHub
+    - [Optional] Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
+        - use the test.yaml workflow
+
 - KubeVela to deploy the apps
     - Annotations: Feature Toggles
 - Two apps

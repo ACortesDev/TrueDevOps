@@ -5,37 +5,31 @@ metadata:
 spec:
   serviceAccountName: argoworkflows-argo-workflows-server
   entrypoint: main
+  volumes:
+  - name: regcred
+    secret:
+      secretName: regcred
+      items:
+        - key: .dockerconfigjson
+          path: config.json
   templates:
     - name: main
       dag:
         tasks:
-          - name: generate-artifact
-            template: save-message
-          - name: consume-artifact
-            template: print-message
-            dependencies:
-              - generate-artifact
+          - name: build
+            templateRef:
+              name: container-image
+              template: build-kaniko-git
+              clusterScope: true
             arguments:
-              artifacts:
-                - name: message
-                  from: "{{tasks.generate-artifact.outputs.artifacts.hello-art}}"
-
-    - name: save-message
-      container:
-        image: docker/whalesay
-        command: [ sh, -c ]
-        args: [ "cowsay hello world > /tmp/hello_world.txt" ]
-      outputs:
-        artifacts:
-          - name: hello-art
-            path: /tmp/hello_world.txt
-
-    - name: print-message
-      inputs:
-        artifacts:
-          - name: message
-            path: /tmp/message
-      container:
-        image: docker/whalesay
-        command: [ sh, -c ]
-        args: [ "cat /tmp/message" ]
+              parameters:
+              - name: repo_url
+                value: ""
+              - name: repo_ref
+                value: refs/heads/master
+              - name: repo_commit_id
+                value: HEAD
+              - name: container_image
+                value: alvarocortes/
+              - name: container_tag
+                value: "acortes:0.1"

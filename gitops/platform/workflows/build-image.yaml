@@ -10,9 +10,7 @@ spec:
       parameters:
       - name: repo_url
       - name: repo_ref
-        value: refs/heads/master
       - name: repo_commit_id
-        value: HEAD
       - name: container_image
       - name: container_tag
     container:
