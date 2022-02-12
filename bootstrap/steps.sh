@@ -111,10 +111,6 @@ git add -A
 git commit -m "Sealed Secrets"
 git push
 
-# TODO:
-- Workflow that builds and pushes to Dockerhub
-- KubeVela to deploy the app
-
 ##############
 # KubeVela UX
 ##############
@@ -124,3 +120,18 @@ vela status addon-velaux -n vela-system --endpoint
 
 # Shutdown
 k3d cluster delete mycluster
+
+# TODO:
+- Workflow that builds and pushes to DockerHub
+- KubeVela to deploy the apps
+    - Annotations: Feature Toggles
+- Two apps
+    - Only build changes
+- Communicate the apps
+    - [Pulsar](https://pulsar.apache.org/docs/en/kubernetes-helm/)
+
+- Infra party:
+    - Provide a cluster [Civo](https://www.civo.com/pricing)
+        - [Optional] Auto join the cluster to KubeVela:
+            - Declarative? Crossplane Composite?
+    - Deploy apps to the provided cluster
