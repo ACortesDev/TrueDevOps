@@ -22,7 +22,7 @@ spec:
       - name: controller.containerRuntimeExecutor
         value: emissary
       - name: controller.workflowNamespaces
-        value: "{argo}"
+        value: "{\"argo\"}"
   destination:
     namespace: argo
     server: https://kubernetes.default.svc
