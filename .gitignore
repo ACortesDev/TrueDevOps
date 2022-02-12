@@ -1,2 +1,2 @@
-# Local secrets
-bootstrap/export_secrets.sh
+# Credentials (local)
+bootstrap/creds.sh

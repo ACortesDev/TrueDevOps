@@ -69,6 +69,11 @@ echo "admin:admin123"
 echo "CHECK OUT gitops/platform/argo-workflows.yaml HOST!!!"
 echo http://argo-workflows.$BASE_HOST
 
+###############
+# GitOps Time
+###############
+kubectl apply -f bootstrap/platform.yaml
+
 # Sealed Secrets
 kubectl --namespace argo \
     create secret \
@@ -100,11 +105,13 @@ data:
         --format yaml \
     | tee gitops/platform/secrets/github.yaml
 
-###############
-# GitOps Time
-###############
-kubectl apply -f bootstrap/platform.yaml
+git add -A
+git commit -m "Sealed Secrets"
+git push
 
+# TODO:
+- Workflow that builds and pushes to Dockerhub
+- KubeVela to deploy the app
 
 ##############
 # KubeVela UX
