@@ -24,7 +24,7 @@ spec:
             arguments:
               parameters:
               - name: repo_url
-                value: https://github.com/ACortesDev/k8s-gitops
+                value: https://github.com/ACortesDev/k8s-gitops.git
               - name: repo_ref
                 value: refs/heads/master
               - name: repo_commit_id
