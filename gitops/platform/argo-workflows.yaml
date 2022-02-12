@@ -19,6 +19,8 @@ spec:
         value: "{argo-workflows.172.19.0.3.nip.io}"
       - name: server.extraArgs
         value: "{--auth-mode=server}"
+      - name: controller.containerRuntimeExecutor
+        value: pns
   destination:
     namespace: argo
     server: https://kubernetes.default.svc
