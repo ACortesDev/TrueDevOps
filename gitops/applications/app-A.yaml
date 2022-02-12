@@ -17,7 +17,7 @@ spec:
         mountPath: /etc/podinfo
     env:
     - name: ANNOTATIONS_PATH
-      value: /etc/podinfo
+      value: /etc/podinfo/build
   volumes:
   - name: podinfo
     downwardAPI:
