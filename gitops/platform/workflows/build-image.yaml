@@ -18,7 +18,7 @@ spec:
       image: gcr.io/kaniko-project/executor:latest
       command: [/kaniko/executor]
       args:
-      - --context={{inputs.parameters.repo_url}}#{{inputs.parameters.repo_ref}}#{{inputs.parameters.repo_commit_id}}
+      - --context={{inputs.parameters.repo_url}}
       - --destination={{inputs.parameters.container_image}}:{{inputs.parameters.container_tag}}
       - --dockerfile={{inputs.parameters.dockerfile_path}}
       volumeMounts:

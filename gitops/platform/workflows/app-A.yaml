@@ -4,7 +4,7 @@ metadata:
   name: app-a
 spec:
   serviceAccountName: argoworkflows-argo-workflows-server
-  entrypoint: main
+  entrypoint: build
   volumes:
   - name: regcred
     secret:
@@ -13,7 +13,7 @@ spec:
         - key: .dockerconfigjson
           path: config.json
   templates:
-    - name: main
+    - name: build
       dag:
         tasks:
           - name: build
