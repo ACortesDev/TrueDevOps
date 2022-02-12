@@ -84,7 +84,7 @@ kubectl --namespace argo \
     docker-registry regcred \
     --docker-server=$REGISTRY_SERVER \
     --docker-username=$REGISTRY_USER \
-    --docker-password=$REGISTRY_PASS \
+    --docker-password=$REGISTRY_TOKEN \
     --docker-email=$REGISTRY_EMAIL \
     --output json \
     --dry-run=client \

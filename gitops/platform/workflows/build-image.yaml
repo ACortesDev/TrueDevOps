@@ -15,7 +15,7 @@ spec:
       - name: container_tag
       - name: dockerfile_path
     container:
-      image: gcr.io/kaniko-project/executor:v1.6.0-debug
+      image: gcr.io/kaniko-project/executor:latest
       command: [/kaniko/executor]
       args:
       - --context={{inputs.parameters.repo_url}}
