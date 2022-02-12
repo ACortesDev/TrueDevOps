@@ -24,7 +24,7 @@ spec:
             arguments:
               parameters:
               - name: repo_url
-                value: https://github.com/ACortesDev/k8s-gitops.git
+                value: git://github.com/ACortesDev/k8s-gitops.git
               - name: repo_ref
                 value: refs/heads/master
               - name: repo_commit_id
@@ -33,3 +33,5 @@ spec:
                 value: alvarocortes/
               - name: container_tag
                 value: "acortes:0.1"
+              - name: dockerfile_path
+                value: apps/app-A/Dockerfile
