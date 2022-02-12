@@ -1,7 +1,5 @@
 FROM python:3.7
 
-WORKDIR /app
-
-COPY apps/app-A .
+COPY apps/app-A/main.py .
 
 CMD [ "python", "./main.py" ]
