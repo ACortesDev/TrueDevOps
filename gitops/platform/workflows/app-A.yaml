@@ -3,6 +3,7 @@ kind: WorkflowTemplate
 metadata:
   name: app-a
 spec:
+  serviceAccountName: argoworkflows-argo-workflows-server
   entrypoint: main
   templates:
     - name: main
