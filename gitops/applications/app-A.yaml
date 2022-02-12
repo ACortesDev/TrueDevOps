@@ -5,8 +5,8 @@ metadata:
     run: test
   name: test
   annotations:
-    build: two
-    builder: john-doe
+    build: three
+    builder: lauchilla
 spec:
   containers:
   - image: alvarocortes/acortes:1.0.0
