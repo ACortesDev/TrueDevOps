@@ -1,5 +1,7 @@
 FROM python:3.7
 
-COPY apps/app-A/main.py .
+COPY apps/app-A /apps/app-A
 
-CMD [ "python", "./main.py" ]
+WORKDIR /apps/app-A
+
+CMD [ "python", "main.py" ]
