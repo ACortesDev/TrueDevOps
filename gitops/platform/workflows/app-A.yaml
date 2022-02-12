@@ -26,9 +26,9 @@ spec:
               - name: repo_url
                 value: git://github.com/ACortesDev/k8s-gitops
               - name: repo_ref
-                value: main
+                value: "" # Not being used
               - name: repo_commit_id
-                value: HEAD
+                value: "" # Not being used
               - name: container_image
                 value: alvarocortes/acortes
               - name: container_tag
