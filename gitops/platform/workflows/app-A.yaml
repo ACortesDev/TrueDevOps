@@ -32,6 +32,6 @@ spec:
               - name: container_image
                 value: alvarocortes/acortes
               - name: container_tag
-                value: "0.1"
+                value: "1.0.0"
               - name: dockerfile_path
                 value: apps/app-A/Dockerfile
