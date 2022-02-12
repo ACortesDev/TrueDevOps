@@ -21,8 +21,6 @@ spec:
         value: "{--auth-mode=server}"
       - name: controller.containerRuntimeExecutor
         value: emissary
-      - name: controller.workflowNamespaces
-        value: "{\"argo\"}"
   destination:
     namespace: argo
     server: https://kubernetes.default.svc
