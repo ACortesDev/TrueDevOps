@@ -75,6 +75,8 @@ echo http://argo-workflows.$BASE_HOST
 kubectl apply -f bootstrap/platform.yaml
 
 # Sealed Secrets
+source bootstrap/creds.sh
+
 kubectl --namespace argo \
     create secret \
     docker-registry regcred \
