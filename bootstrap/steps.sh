@@ -74,7 +74,7 @@ echo http://argo-workflows.$BASE_HOST
 ###############
 # GitOps Time
 ###############
-kubectl apply -f bootstrap/platform.yaml
+kubectl apply -f bootstrap/init-gitops.yaml
 
 # Sealed Secrets
 source bootstrap/creds.sh
@@ -140,3 +140,12 @@ k3d cluster delete mycluster
         - [Optional] Auto join the cluster to KubeVela:
             - Declarative? Crossplane Composite?
     - Deploy apps to the provided cluster
+
+
+#######
+# MISC
+#######
+kubectl run test \
+    --image=alvarocortes/acortes:1.0.0 \
+    --image-pull-policy='Always' \
+    --rm -it -- /bin/bash
