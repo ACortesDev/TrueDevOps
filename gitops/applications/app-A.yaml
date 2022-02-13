@@ -1,27 +1,36 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   labels:
-    run: app-a
+    app: app-a
   name: app-a
-  annotations:
-    feature-foo: "off"
-    feature-bar: "on"
 spec:
-  containers:
-  - image: alvarocortes/acortes:1.0.0
-    imagePullPolicy: Always
-    name: app-a
-    volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-a
+  template:
+    metadata:
+        labels:
+          app: app-a
+        annotations:
+          feature-foo: "off"
+          feature-bar: "on"
+    spec:
+      containers:
+      - image: alvarocortes/acortes:1.0.0
+        imagePullPolicy: Always
+        name: app-a
+        volumeMounts:
+          - name: podinfo
+            mountPath: /etc/podinfo
+        env:
+        - name: ANNOTATIONS_PATH
+          value: /etc/podinfo/annotations
+      volumes:
       - name: podinfo
-        mountPath: /etc/podinfo
-    env:
-    - name: ANNOTATIONS_PATH
-      value: /etc/podinfo/annotations
-  volumes:
-  - name: podinfo
-    downwardAPI:
-      items:
-      - path: "annotations"
-        fieldRef:
-          fieldPath: metadata.annotations
+        downwardAPI:
+          items:
+          - path: "annotations"
+            fieldRef:
+              fieldPath: metadata.annotations
