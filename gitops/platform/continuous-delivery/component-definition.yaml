@@ -19,23 +19,17 @@ spec:
         output: {
           apiVersion: "apps/v1"
           kind:       "Deployment"
-          metadata: {
-            name: context.name
-            labels: {
-              app: context.name
-            }
-          }
           spec: {
             replicas: 1
             selector: {
               matchLabels: {
-                app: context.name
+                "app.oam.dev/component": context.name
               }
             }
             template: {
               metadata: {
                 labels: {
-                  app: context.name
+                  "app.oam.dev/component": context.name
                 }
                 annotations: parameter["feature-toggles"]
               }

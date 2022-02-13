@@ -131,7 +131,7 @@ k3d cluster delete mycluster
     - [Optional] Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
         - use the test.yaml workflow
 
-- KubeVela to deploy the apps
+- KubeVela to deploy the apps   (WTF: Out of Sync Requires Pruning)
     - Annotations: Feature Toggles
 
 - Question: ArgoCD application vs project??
