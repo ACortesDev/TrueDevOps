@@ -131,7 +131,9 @@ k3d cluster delete mycluster
     - [Optional] Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
         - use the test.yaml workflow
 
-- KubeVela to deploy the apps   (WTF: Out of Sync Requires Pruning)
+- KubeVela to deploy the apps
+    - [WTF: Out of Sync Requires Pruning](https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing)
+    - [WTF] Applications not showing up in Vela UX
     - Annotations: Feature Toggles
 
 - Question: ArgoCD application vs project??

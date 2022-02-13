@@ -24,6 +24,9 @@ spec:
             labels: {
               "app.oam.dev/component": context.name
             }
+            annotations: {
+              "argocd.argoproj.io/sync-options": "Prune=false"
+            }
           }
           spec: {
             replicas: 1
