@@ -26,6 +26,7 @@ spec:
             }
             annotations: {
               "argocd.argoproj.io/sync-options": "Prune=false"
+              "argocd.argoproj.io/compare-options": "IgnoreExtraneous"
             }
           }
           spec: {
