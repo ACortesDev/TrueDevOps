@@ -1,7 +1,7 @@
 apiVersion: core.oam.dev/v1beta1
 kind: Application
 metadata:
-  name: first-vela-app
+  name: app-a
 spec:
   components:
     - name: app-a
