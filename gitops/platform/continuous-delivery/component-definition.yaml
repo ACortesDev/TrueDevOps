@@ -69,7 +69,7 @@ spec:
                         path: "annotations"
                         fieldRef: {
                           fieldPath: "metadata.annotations"
-                        }
+                        },
                       ]
                     }
                   }
