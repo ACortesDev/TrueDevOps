@@ -15,7 +15,7 @@ spec:
 
         parameter: {
           image: string
-          feature-toggles: [string]: #toggle,
+          "feature-toggles": [#featurename]: #toggle
         }
 
         output: {
@@ -39,7 +39,7 @@ spec:
                 labels: {
                   name: parameter.name
                 }
-                annotations: parameter.feature-toggles
+                annotations: parameter["feature-toggles"]
               }
               spec: {
                 containers: [
@@ -66,10 +66,12 @@ spec:
                     name: "podinfo"
                     downwardAPI: {
                       items: [
-                        path: "annotations"
-                        fieldRef: {
-                          fieldPath: "metadata.annotations"
-                        },
+                        {
+                          path: "annotations"
+                          fieldRef: {
+                            fieldPath: "metadata.annotations"
+                          }
+                        }
                       ]
                     }
                   }

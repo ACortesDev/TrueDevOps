@@ -7,6 +7,7 @@
 #   - argo (Argo Workflows cli)
 #   - vela (KubeVela cli)
 #   - kubeseal (bitnami sealed-secrets cli)
+#   - [optional] cue (CUE cli)
 #
 #   - mc (minio cli)
 #
