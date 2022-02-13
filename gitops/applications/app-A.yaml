@@ -1,36 +1,13 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: core.oam.dev/v1beta1
+kind: Application
 metadata:
-  labels:
-    app: app-a
-  name: app-a
+  name: first-vela-app
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: app-a
-  template:
-    metadata:
-        labels:
-          app: app-a
-        annotations:
-          feature-foo: "off"
-          feature-bar: "on"
-    spec:
-      containers:
-      - image: alvarocortes/acortes:1.0.0
-        imagePullPolicy: Always
-        name: app-a
-        volumeMounts:
-          - name: podinfo
-            mountPath: /etc/podinfo
-        env:
-        - name: ANNOTATIONS_PATH
-          value: /etc/podinfo/annotations
-      volumes:
-      - name: podinfo
-        downwardAPI:
-          items:
-          - path: "annotations"
-            fieldRef:
-              fieldPath: metadata.annotations
+  components:
+    - name: app-a
+      type: microservice
+      properties:
+        image: alvarocortes/acortes:1.0.0
+        feature-toggles:
+          feature-foo: "on"
+          feature-bar: "off"
