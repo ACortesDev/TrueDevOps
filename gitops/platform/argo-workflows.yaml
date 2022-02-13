@@ -37,7 +37,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: workflows
+  name: continuous-integration
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -46,7 +46,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: gitops/platform/workflows
+    path: gitops/platform/continuous-integration
   destination:
     server: https://kubernetes.default.svc
     namespace: argo
