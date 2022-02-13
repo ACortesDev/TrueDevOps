@@ -6,16 +6,18 @@ from typing import List, Tuple
 ANNOTATIONS_PATH = os.getenv("ANNOTATIONS_PATH")
 
 
-def get_pod_annotations() -> List[str]:
+def get_feature_flags() -> List[str]:
     def parse_annotation(annotation: str) -> Tuple[str, str]:
         k, v = annotation.split("=")
         return k, v.strip()
 
     with open(ANNOTATIONS_PATH, "r") as file:
-        return [parse_annotation(line) for line in file]
+        annotations = [parse_annotation(line) for line in file]
+        feature_flags = filter(lambda x: "feature-" in x[0], annotations)
+        return list(feature_flags)
 
 
 if __name__ == "__main__":
     while True:
         time.sleep(5)
-        print(get_pod_annotations())
+        print(get_feature_flags())
