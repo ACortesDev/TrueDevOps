@@ -37,7 +37,7 @@ spec:
     path: gitops/applications
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: vela-system
   syncPolicy:
     automated:
       selfHeal: true
