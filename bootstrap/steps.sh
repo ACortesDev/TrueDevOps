@@ -133,6 +133,8 @@ k3d cluster delete mycluster
 
 - Question: ArgoCD application vs project??
 
+- Argo Events: Build on commit push
+
 - Two apps
     - Only build changes
 - Communicate the apps

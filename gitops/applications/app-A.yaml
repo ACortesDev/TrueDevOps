@@ -5,7 +5,8 @@ metadata:
     run: app-a
   name: app-a
   annotations:
-    my-cool-feature: "off"
+    feature-foo: "off"
+    feature-bar: "on"
 spec:
   containers:
   - image: alvarocortes/acortes:1.0.0
