@@ -1,0 +1,13 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: first-vela-app
+spec:
+  components:
+    - name: app-A
+      type: microservice
+      properties:
+        image: alvarocortes/acortes:1.0.0
+        feature-toggles:
+          feature-foo: "on"
+          feature-bar: "off"
