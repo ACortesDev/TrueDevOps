@@ -7,7 +7,7 @@ ANNOTATIONS_PATH = os.getenv("ANNOTATIONS_PATH")
 
 def parse_annotation(annotation: str):
     k, v = annotation.split("=")
-    return k, v.strip("\"")
+    return k, v.strip().replace("\"", "")
 
 
 def get_feature_flags() -> dict:

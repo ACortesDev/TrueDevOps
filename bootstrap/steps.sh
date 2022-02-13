@@ -132,7 +132,7 @@ k3d cluster delete mycluster
         - use the test.yaml workflow
 
 - KubeVela to deploy the apps
-    - [WTF: Out of Sync Requires Pruning](https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing)
+    - Solved [WTF: Out of Sync Requires Pruning](https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing)
     - [WTF] Applications not showing up in Vela UX
     - Annotations: Feature Toggles
 
