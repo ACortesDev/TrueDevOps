@@ -2,16 +2,15 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    run: test
-  name: test
+    run: app-a
+  name: app-a
   annotations:
-    build: three
-    builder: lauchilla
+    my-cool-feature: "off"
 spec:
   containers:
   - image: alvarocortes/acortes:1.0.0
     imagePullPolicy: Always
-    name: test
+    name: app-a
     volumeMounts:
       - name: podinfo
         mountPath: /etc/podinfo

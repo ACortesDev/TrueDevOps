@@ -131,6 +131,8 @@ k3d cluster delete mycluster
 - KubeVela to deploy the apps
     - Annotations: Feature Toggles
 
+- Question: ArgoCD application vs project??
+
 - Two apps
     - Only build changes
 - Communicate the apps
