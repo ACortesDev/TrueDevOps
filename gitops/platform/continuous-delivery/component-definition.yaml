@@ -19,6 +19,12 @@ spec:
         output: {
           apiVersion: "apps/v1"
           kind:       "Deployment"
+          metadata: {
+            name: context.name
+            labels: {
+              "app.oam.dev/component": context.name
+            }
+          }
           spec: {
             replicas: 1
             selector: {
