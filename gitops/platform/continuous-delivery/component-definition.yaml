@@ -11,13 +11,11 @@ spec:
   schematic:
     cue:
       template: |
-        featurename: ~="^feature-[a-z]{3}$"
-
         #toggle: "on" | "off"
 
         parameter: {
           image: string
-          feature-toggles: [featurename]: #toggle
+          feature-toggles: [string]: #toggle
         }
 
         output: {
