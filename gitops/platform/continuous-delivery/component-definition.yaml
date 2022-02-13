@@ -15,7 +15,7 @@ spec:
 
         parameter: {
           image: string
-          "feature-toggles": [#featurename]: #toggle
+          "feature-toggles": [string]: #toggle
         }
 
         output: {
