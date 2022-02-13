@@ -12,39 +12,37 @@ spec:
     cue:
       template: |
         #toggle: "on" | "off"
-
         parameter: {
           image: string
           "feature-toggles": [string]: #toggle
         }
-
         output: {
           apiVersion: "apps/v1"
           kind:       "Deployment"
           metadata: {
-            name: parameter.name
+            name: context.name
             labels: {
-              app: parameter.name
+              app: context.name
             }
           }
           spec: {
             replicas: 1
             selector: {
               matchLabels: {
-                app: parameter.name
+                app: context.name
               }
             }
             template: {
               metadata: {
                 labels: {
-                  name: parameter.name
+                  name: context.name
                 }
                 annotations: parameter["feature-toggles"]
               }
               spec: {
                 containers: [
                   {
-                    name:  parameter.name
+                    name:  context.name
                     image: parameter.image
                     imagePullPolicy: "Always"
                     volumeMounts: [

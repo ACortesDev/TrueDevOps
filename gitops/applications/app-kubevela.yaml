@@ -4,7 +4,7 @@ metadata:
   name: first-vela-app
 spec:
   components:
-    - name: app-A
+    - name: microservice-a
       type: microservice
       properties:
         image: alvarocortes/acortes:1.0.0

@@ -121,6 +121,8 @@ vela addon enable velaux serviceType=NodePort
 
 vela status addon-velaux -n vela-system --endpoint
 
+kubectl get app.core.oam.dev -n vela-system
+
 # Shutdown
 k3d cluster delete mycluster
 
