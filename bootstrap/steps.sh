@@ -130,6 +130,7 @@ k3d cluster delete mycluster
 
 - KubeVela to deploy the apps
     - Annotations: Feature Toggles
+
 - Two apps
     - Only build changes
 - Communicate the apps
