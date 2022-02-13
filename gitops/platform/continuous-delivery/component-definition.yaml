@@ -35,7 +35,7 @@ spec:
             template: {
               metadata: {
                 labels: {
-                  name: context.name
+                  app: context.name
                 }
                 annotations: parameter["feature-toggles"]
               }
