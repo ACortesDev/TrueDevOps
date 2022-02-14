@@ -12,7 +12,6 @@
 #   - mc (minio cli)
 #
 
-
 ###################################################
 # 1. Get a local cluster to use as a control plane
 ###################################################
@@ -127,21 +126,21 @@ kubectl get app.core.oam.dev -n vela-system
 k3d cluster delete mycluster
 
 # TODO:
-- Workflow that builds and pushes to DockerHub
-    - [Optional] Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
-        - use the test.yaml workflow
-
-- KubeVela to deploy the apps
-    - Solved [WTF: Out of Sync Requires Pruning](https://argo-cd.readthedocs.io/en/stable/faq/#why-is-my-app-out-of-sync-even-after-syncing)
-    - [WTF] Applications not showing up in Vela UX
-    - Annotations: Feature Toggles
-
 - Question: ArgoCD application vs project??
 
-- Argo Events: Build on commit push
+- Argo Events: Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
 
-- Two apps
-    - Only build changes
+- KubeVela GitOps to deploy the apps
+    - Use KubeVela Application (kustomize) instead of ArgoCD Application (gitops/applications folder)
+    - [Problem] Applications not showing up in Vela UX
+
+- Better workflow that builds, **TESTS** and pushes to DockerHub
+    - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
+        - use the test.yaml workflow
+- Better workflow
+    - Two apps
+        - Only build app with changes
+
 - Communicate the apps
     - [Pulsar](https://pulsar.apache.org/docs/en/kubernetes-helm/)
 
