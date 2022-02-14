@@ -126,9 +126,9 @@ kubectl get app.core.oam.dev -n vela-system
 k3d cluster delete mycluster
 
 # TODO:
-- Question: ArgoCD application vs project??
-
 - Argo Events: Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
+
+- Question: ArgoCD application vs project??
 
 - Better workflow that builds, **TESTS** and pushes to DockerHub
     - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
