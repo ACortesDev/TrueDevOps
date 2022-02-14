@@ -116,9 +116,9 @@ git push
 ##############
 # KubeVela UX
 ##############
-vela addon enable velaux serviceType=NodePort
+#vela addon enable velaux serviceType=NodePort
 
-vela status addon-velaux -n vela-system --endpoint
+#vela status addon-velaux -n vela-system --endpoint
 
 kubectl get app.core.oam.dev -n vela-system
 
@@ -129,10 +129,6 @@ k3d cluster delete mycluster
 - Question: ArgoCD application vs project??
 
 - Argo Events: Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
-
-- KubeVela GitOps to deploy the apps
-    - Use KubeVela Application (kustomize) instead of ArgoCD Application (gitops/applications folder)
-    - [Problem] Applications not showing up in Vela UX
 
 - Better workflow that builds, **TESTS** and pushes to DockerHub
     - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
