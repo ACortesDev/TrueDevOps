@@ -107,7 +107,20 @@ data:
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
-    | tee gitops/platform/secrets/github.yaml
+    | tee gitops/platform/secrets/github-workflows.yaml
+
+echo "apiVersion: v1
+kind: Secret
+metadata:
+  name: github-access
+  namespace: argo-events
+type: Opaque
+data:
+  token: $(echo -n $GH_TOKEN | base64)" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee gitops/platform/secrets/github-events.yaml
 
 git add -A
 git commit -m "Sealed Secrets"
