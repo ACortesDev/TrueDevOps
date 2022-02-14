@@ -45,3 +45,21 @@ spec:
       selfHeal: true
       prune: true
       allowEmpty: true
+
+---
+
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: kubevela-applications
+spec:
+  components:
+    - name: applications
+      type: kustomize
+      properties:
+        repoType: git
+        url: https://github.com/ACortesDev/k8s-gitops
+        git:
+          branch: main
+          provider: GitHub
+        path: ./gitops/applications
