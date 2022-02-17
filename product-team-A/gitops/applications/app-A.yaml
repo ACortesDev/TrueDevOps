@@ -5,7 +5,7 @@ metadata:
 spec:
   components:
     - name: app-a
-      type: microservice
+      type: backend-microservice
       properties:
         image: alvarocortes/acortes:1.0.0
         feature-toggles:
