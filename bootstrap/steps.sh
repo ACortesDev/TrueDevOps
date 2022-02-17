@@ -81,7 +81,7 @@ source bootstrap/creds.sh
 
 kubectl --namespace argo \
     create secret \
-    docker-registry regcred \
+    docker-registry registry-credentials \
     --docker-server=$REGISTRY_SERVER \
     --docker-username=$REGISTRY_USER \
     --docker-password=$REGISTRY_TOKEN \
