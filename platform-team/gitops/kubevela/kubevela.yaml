@@ -6,7 +6,7 @@ metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: controllers
   source:
     chart: vela-core
     repoURL: https://charts.kubevela.net/core
