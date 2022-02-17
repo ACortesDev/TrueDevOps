@@ -27,7 +27,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: continuous-delivery
+  name: self-service-applications
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -36,7 +36,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: gitops/platform/continuous-delivery
+    path: platform-team/self-service/applications
   destination:
     server: https://kubernetes.default.svc
     namespace: vela-system

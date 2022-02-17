@@ -1,10 +1,10 @@
 apiVersion: core.oam.dev/v1beta1
 kind: ComponentDefinition
 metadata:
-  name: microservice
+  name: backend-microservice
   namespace: vela-system
   annotations:
-    definition.oam.dev/description: "microservice is a group of K8s resources"
+    definition.oam.dev/description: "Backend microservice is a group of K8s resources"
 spec:
   workload:
     type: autodetects.core.oam.dev

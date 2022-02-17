@@ -1,31 +1,43 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sealedsecrets
+  name: argoworkflows
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    chart: sealed-secrets
-    repoURL: https://bitnami-labs.github.io/sealed-secrets
-    targetRevision: "2.1.2"
+    chart: argo-workflows
+    repoURL: https://argoproj.github.io/argo-helm
+    targetRevision: "0.10.1"
+    helm:
+      parameters:
+      - name: server.ingress.enabled
+        value: "true"
+      - name: server.ingress.hosts
+        value: "{argo-workflows.172.19.0.3.nip.io}"
+      - name: server.extraArgs
+        value: "{--auth-mode=server}"
+      - name: controller.containerRuntimeExecutor
+        value: emissary
   destination:
-    namespace: kube-system
+    namespace: argo
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
       allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
 
 ---
 
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: secrets
+  name: continuous-integration
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -34,7 +46,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: gitops/platform/secrets
+    path: platform-team/gitops/argo-workflows/pipelines
   destination:
     server: https://kubernetes.default.svc
     namespace: argo

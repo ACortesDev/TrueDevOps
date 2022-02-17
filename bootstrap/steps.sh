@@ -74,7 +74,7 @@ echo http://argo-workflows.$BASE_HOST
 ###############
 # GitOps Time
 ###############
-kubectl apply -f bootstrap/init-gitops.yaml
+kubectl apply -f bootstrap/init.yaml
 
 # Sealed Secrets
 source bootstrap/creds.sh
@@ -91,7 +91,7 @@ kubectl --namespace argo \
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
-    | tee gitops/platform/secrets/registry.yaml
+    | tee platform-team/gitops/sealed-secrets/secrets/registry.yaml
 
 
 echo "apiVersion: v1
@@ -107,20 +107,20 @@ data:
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
-    | tee gitops/platform/secrets/github-workflows.yaml
+    | tee platform-team/gitops/sealed-secrets/secrets/github-argoworkflows.yaml
 
-echo "apiVersion: v1
-kind: Secret
-metadata:
-  name: github-access
-  namespace: argo-events
-type: Opaque
-data:
-  token: $(echo -n $GH_TOKEN | base64)" \
-    | kubeseal \
-        --controller-name=sealedsecrets-sealed-secrets \
-        --format yaml \
-    | tee gitops/platform/secrets/github-events.yaml
+# echo "apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: github-access
+#   namespace: argo-events
+# type: Opaque
+# data:
+#   token: $(echo -n $GH_TOKEN | base64)" \
+#     | kubeseal \
+#         --controller-name=sealedsecrets-sealed-secrets \
+#         --format yaml \
+#     | tee platform-team/gitops/sealed-secrets/secrets/github-events.yaml
 
 git add -A
 git commit -m "Sealed Secrets"

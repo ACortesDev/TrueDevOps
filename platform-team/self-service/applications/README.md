@@ -12,7 +12,7 @@ metadata:
 spec:
   components:
     - name: <name_of_the_microservice>
-      type: microservice
+      type: backend-microservice
       properties:
         image: <image>
         feature-toggles:

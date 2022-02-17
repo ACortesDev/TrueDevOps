@@ -1,19 +1,42 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: AppProject
 metadata:
-  name: platform
+  name: team-a
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  description: "Team A project to define the team's permissions"
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: '*'
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-a-applications
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: team-a
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: gitops/platform
+    path: product-team-A/gitops/applications
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: vela-system
   syncPolicy:
     automated:
       selfHeal: true
@@ -25,19 +48,19 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
+  name: team-a-infrastructure
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: default
+  project: team-a
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: gitops/applications
+    path: product-team-A/gitops/infrastructure
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: vela-system
   syncPolicy:
     automated:
       selfHeal: true
