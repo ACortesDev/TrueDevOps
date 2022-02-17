@@ -68,7 +68,7 @@ echo "admin:admin123"
 ##########################
 # Setup Secrets and Hosts
 ##########################
-echo "CHECK OUT gitops/platform/argo-workflows.yaml HOST!!!"
+echo "CHECK OUT platform-team/gitops/argo-workflows/argo-workflows.yaml HOST!!!"
 echo http://argo-workflows.$BASE_HOST
 
 ###############
