@@ -122,6 +122,62 @@ data:
 #         --format yaml \
 #     | tee platform-team/gitops/secrets/github-events.yaml
 
+echo "apiVersion: v1
+data:
+  PRIVATEKEY: $(echo -n $PULSAR_PRIVATE)
+  PUBLICKEY: $(echo -n $PULSAR_PUBLIC)
+kind: Secret
+type: Opaque
+metadata:
+  name: pulsar-mini-token-asymmetric-key
+  namespace: pulsar" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee platform-team/gitops/secrets/pulsar-mini-token-asymmetric-key.yaml
+
+echo "apiVersion: v1
+data:
+  TOKEN: $(echo -n $PULSAR_TOKEN_BROKER)
+  TYPE: $(echo -n $PULSAR_TYPE)
+kind: Secret
+type: Opaque
+metadata:
+  name: pulsar-mini-token-broker-admin
+  namespace: pulsar" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee platform-team/gitops/secrets/pulsar-mini-token-broker-admin.yaml
+
+echo "apiVersion: v1
+data:
+  TOKEN: $(echo -n $PULSAR_TOKEN_ADMIN)
+  TYPE: $(echo -n $PULSAR_TYPE)
+kind: Secret
+type: Opaque
+metadata:
+  name: pulsar-mini-token-admin
+  namespace: pulsar" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee platform-team/gitops/secrets/pulsar-mini-token-admin.yaml
+
+echo "apiVersion: v1
+data:
+  TOKEN: $(echo -n $PULSAR_TOKEN_PROXY)
+  TYPE: $(echo -n $PULSAR_TYPE)
+kind: Secret
+type: Opaque
+metadata:
+  name: pulsar-mini-token-proxy-admin
+  namespace: pulsar" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee platform-team/gitops/secrets/pulsar-mini-token-proxy-admin.yaml
+
 git add -A
 git commit -m "Sealed Secrets"
 git push
@@ -142,8 +198,14 @@ k3d cluster delete mycluster
 - Services (Teams):
     - Communicate the apps
         - Pulsar
-            https://pulsar.apache.org/docs/en/kubernetes-helm/)
+            https://pulsar.apache.org/docs/en/kubernetes-helm/
             https://github.com/apache/pulsar-helm-chart
+
+./scripts/pulsar/prepare_helm_release.sh \
+    -n pulsar \
+    -k pulsar-mini \
+    -c -l
+
         - Document with Async API
     - Play with Prisidio
 

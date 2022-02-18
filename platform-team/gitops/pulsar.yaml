@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pulsar
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: pulsar-mini
+    repoURL: https://pulsar.apache.org/charts
+    targetRevision: "2.7.12"
+    helm:
+      parameters:
+      - name: initialize
+        value: "true"
+      - name: volumes.persistence
+        value: "false"
+      - name: affinity.anti_affinity
+        value: "false"
+      - name: components.autorecovery
+        value: "false"
+      - name: zookeeper.replicaCount
+        value: "1"
+      - name: bookeeper.replicaCount
+        value: "1"
+      - name: broker.replicaCount
+        value: "1"
+      - name: broker.configData.autoSkipNonRecoverableData
+        value: "true"
+      - name: broker.configData.managedLedgerDefaultEnsembleSize
+        value: "1"
+      - name: broker.configData.managedLedgerDefaultWriteQuorum
+        value: "1"
+      - name: broker.configData.managedLedgerDefaultAckQuorum
+        value: "1"
+      - name: proxy.replicaCount
+        value: "1"
+  destination:
+    namespace: pulsar
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true
