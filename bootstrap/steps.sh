@@ -139,18 +139,13 @@ kubectl get app.core.oam.dev -n vela-system
 k3d cluster delete mycluster
 
 # TODO:
-- Argo Events from resources instead of Helm (https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml)
-- Argo Events: Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
-    - https://k3d.io/v5.0.0/usage/exposing_services/
-
-- Question: ArgoCD application vs project? (https://argo-cd.readthedocs.io/en/stable/user-guide/projects/)
-
-- Better workflow that builds, **TESTS** and pushes to DockerHub
-    - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
-        - use the test.yaml workflow
-
-- Communicate the apps
-    - [Pulsar](https://pulsar.apache.org/docs/en/kubernetes-helm/)
+- Services (Teams):
+    - Communicate the apps
+        - Pulsar
+            https://pulsar.apache.org/docs/en/kubernetes-helm/)
+            https://github.com/apache/pulsar-helm-chart
+        - Document with Async API
+    - Play with Prisidio
 
 - Infra party:
     - Provide a cluster [Civo](https://www.civo.com/pricing)
@@ -158,6 +153,16 @@ k3d cluster delete mycluster
             - Declarative? Crossplane Composite?
     - Deploy apps to the provided cluster
 
+- Argo CD:
+    - Kustomize instead of Helm charts (https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml)
+
+- Argo Events + Workflows:
+    - Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
+    - https://k3d.io/v5.0.0/usage/exposing_services/
+
+- Argo Workflows:
+    - Better workflow that builds, **TESTS** and pushes to DockerHub
+    - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
 
 #######
 # MISC

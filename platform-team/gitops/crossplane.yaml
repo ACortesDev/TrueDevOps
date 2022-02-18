@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argoevents
+  name: crossplane
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
-  project: controllers
+  project: default
   source:
-    chart: argo-events
-    repoURL: https://argoproj.github.io/argo-helm
-    targetRevision: "1.10.2"
+    chart: crossplane
+    repoURL: https://charts.crossplane.io/stable
+    targetRevision: "1.3.0"
   destination:
-    namespace: argo-events
+    namespace: crossplane-system
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
