@@ -91,7 +91,7 @@ kubectl --namespace argo \
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
-    | tee platform-team/gitops/sealed-secrets/secrets/registry.yaml
+    | tee platform-team/gitops/secrets/registry.yaml
 
 
 echo "apiVersion: v1
@@ -107,7 +107,7 @@ data:
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
-    | tee platform-team/gitops/sealed-secrets/secrets/github-argoworkflows.yaml
+    | tee platform-team/gitops/secrets/github-argoworkflows.yaml
 
 # echo "apiVersion: v1
 # kind: Secret
@@ -120,7 +120,7 @@ data:
 #     | kubeseal \
 #         --controller-name=sealedsecrets-sealed-secrets \
 #         --format yaml \
-#     | tee platform-team/gitops/sealed-secrets/secrets/github-events.yaml
+#     | tee platform-team/gitops/secrets/github-events.yaml
 
 git add -A
 git commit -m "Sealed Secrets"
