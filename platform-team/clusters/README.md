@@ -22,8 +22,8 @@ Namespaces:
 Cluster name: `experimental-cluster`
 Namespaces:
 
-- `development`: 
-- `demo`: 
+- `development`: Latest changes.
+- `demo`: Frozen image tags.
 
 ## Preproduction (PREPROD)
 
