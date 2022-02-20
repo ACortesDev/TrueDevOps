@@ -17,6 +17,8 @@
 ###################################################
 k3d cluster create mycluster
 
+# k3d cluster create -p "8081:80@loadbalancer"
+
 ################################################
 # 2. Get the external IP of the Ingress service
 ################################################
@@ -26,6 +28,7 @@ export INGRESS_HOST=$(kubectl \
     -o=jsonpath='{$.status.loadBalancer.ingress[0].ip}')
 
 export BASE_HOST="$INGRESS_HOST.nip.io"
+echo $BASE_HOST
 
 ####################################
 # 3. Install ArgoCD in the cluster
@@ -68,7 +71,7 @@ echo "admin:admin123"
 ##########################
 # Setup Secrets and Hosts
 ##########################
-echo "CHECK OUT platform-team/gitops/argo-workflows/argo-workflows.yaml HOST!!!"
+echo "CHECK OUT platform-team/gitops/argo-workflows.yaml HOST!!!"
 echo http://argo-workflows.$BASE_HOST
 
 ###############
