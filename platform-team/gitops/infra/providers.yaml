@@ -10,7 +10,7 @@ spec:
 apiVersion: civo.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
-  name: civo-provider
+  name: civo-config
 spec:
   region: lon1
   credentials:

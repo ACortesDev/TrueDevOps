@@ -206,7 +206,7 @@ git push
 
 #vela status addon-velaux -n vela-system --endpoint
 
-kubectl get app.core.oam.dev -n vela-system
+kubectl get app.core.oam.dev -n development
 
 # Shutdown
 k3d cluster delete mycluster
