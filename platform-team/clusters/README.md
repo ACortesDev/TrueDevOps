@@ -17,15 +17,15 @@ Namespaces:
 - `argo-workflows`
 - `argo-events`
 
-## Experimental (EXP)
+## Development (DEV)
 
-Cluster name: `experimental-cluster`
+Cluster name: `development-cluster`
 Namespaces:
 
 - `development`: Latest changes.
 - `demo`: Frozen image tags.
 
-## Preproduction (PREPROD)
+## Preproduction (PREPROD) aka Staging
 
 Cluster name: `preprod-cluster`
 
@@ -35,3 +35,5 @@ Clusters' names:
 
 - `production-eu`
 - `production-us`
+- `production-au`
+- ...

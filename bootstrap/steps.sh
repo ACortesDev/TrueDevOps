@@ -112,6 +112,33 @@ data:
         --format yaml \
     | tee platform-team/gitops/secrets/github-argoworkflows.yaml
 
+echo "apiVersion: v1
+kind: Secret
+metadata:
+  namespace: crossplane-system
+  name: civo-provider-secret
+type: Opaque
+data:
+  credentials: $(echo -n $GH_EMAIL | base64)
+---
+apiVersion: civo.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: civo-provider
+spec:
+  region: lon1
+  credentials:
+    source: Secret
+    secretRef:
+      namespace: crossplane-system
+      name: civo-provider-secret
+      key: credentials" \
+    | kubeseal \
+        --controller-name=sealedsecrets-sealed-secrets \
+        --format yaml \
+    | tee platform-team/gitops/secrets/civo-provider-secret.yaml
+
+
 # echo "apiVersion: v1
 # kind: Secret
 # metadata:
