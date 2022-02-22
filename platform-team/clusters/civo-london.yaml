@@ -4,10 +4,12 @@ metadata:
   name: civo-london
 spec:
   name: civo-london
-  instances: 1
-  size: g3.k3s.small
+  pools:
+    - id: "a-random-uuid"
+      count: 1
+      size: g3.k3s.small
   connectionDetails:
-    connectionSecretNamePrefix: cluster-civo
-    connectionSecretNamespace: crossplane-system
+    connectionSecretNamePrefix: "cluster-details"
+    connectionSecretNamespace: "default"
   providerConfigRef:
     name: civo-config
