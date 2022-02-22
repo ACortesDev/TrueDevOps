@@ -27,7 +27,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-stuff
+  name: crossplane-objects
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io

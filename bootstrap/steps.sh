@@ -119,20 +119,7 @@ metadata:
   name: civo-provider-secret
 type: Opaque
 data:
-  credentials: $(echo -n $GH_EMAIL | base64)
----
-apiVersion: civo.crossplane.io/v1alpha1
-kind: ProviderConfig
-metadata:
-  name: civo-provider
-spec:
-  region: lon1
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: civo-provider-secret
-      key: credentials" \
+  credentials: $(echo -n $CIVO_API_KEY | base64)" \
     | kubeseal \
         --controller-name=sealedsecrets-sealed-secrets \
         --format yaml \
