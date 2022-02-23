@@ -13,7 +13,7 @@ spec:
   - namespace: '*'
     server: https://kubernetes.default.svc
   - namespace: '*'
-    server: https://74.220.19.36:6443
+    name: civo-london
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
@@ -37,7 +37,7 @@ spec:
     targetRevision: HEAD
     path: product-team-A/gitops
   destination:
-    server: https://74.220.19.36:6443
+    name: civo-london
     namespace: default
   syncPolicy:
     automated:
