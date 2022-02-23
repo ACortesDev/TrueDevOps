@@ -35,8 +35,8 @@ spec:
     targetRevision: HEAD
     path: product-team-A/gitops
   destination:
-    server: https://kubernetes.default.svc # Experimental cluster
-    namespace: development
+    server: civo-london
+    namespace: default
   syncPolicy:
     automated:
       selfHeal: true

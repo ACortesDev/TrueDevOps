@@ -11,23 +11,3 @@ spec:
         feature-toggles:
           feature-foo: "off"
           feature-bar: "off"
-  
-  policies:
-    - name: cluster-policy
-      type: env-binding
-      properties:
-        envs:
-          - name: development
-            placement:
-              clusterSelector:
-                name: civo-london
-              namespaceSelector:
-                name: development
-  
-  workflow:
-    steps:
-      - name: deploy
-        type: deploy2env
-        properties:
-          policy: cluster-policy
-          env: development

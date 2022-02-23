@@ -221,21 +221,23 @@ git push
 ##############
 # KubeVela UX
 ##############
-vela addon enable velaux serviceType=NodePort
-
-vela status addon-velaux -n vela-system --endpoint
-
-kubectl get app.core.oam.dev -n development
+# vela addon enable velaux serviceType=NodePort
+# vela status addon-velaux -n vela-system --endpoint
+# kubectl get app.core.oam.dev -n development
 
 #######
 # CIVO Cluster
 #######
 
-# Join cluster to Kubevela
+# Join cluster to ArgoCD
 kubectl get secrets cluster-details-civo-london -o yaml \
     | yq eval '.data.kubeconfig' - \
     | base64 -d > civo-london.kubeconfig
-vela cluster join civo-london.kubeconfig # --create-namespace vela-system
+
+argocd cluster add civo-london \
+    --kubeconfig civo-london.kubeconfig \
+    --yes 
+
 rm civo-london.kubeconfig
 
 # Shutdown
