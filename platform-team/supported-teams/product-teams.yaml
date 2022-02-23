@@ -12,6 +12,8 @@ spec:
   destinations:
   - namespace: '*'
     server: https://kubernetes.default.svc
+  - namespace: '*'
+    server: civo-london
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
