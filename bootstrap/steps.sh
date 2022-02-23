@@ -236,7 +236,9 @@ kubectl get secrets cluster-details-civo-london -o yaml \
 
 argocd cluster add civo-london \
     --kubeconfig civo-london.kubeconfig \
-    --yes 
+    --yes
+
+# Ensure the Server address is okay in product-teams.yaml
 
 rm civo-london.kubeconfig
 
