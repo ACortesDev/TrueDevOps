@@ -1,5 +1,6 @@
 ####################################################
 # Requirements:
+#   - yq
 #   - kubectl 
 #   - helm
 #   - k3d (k3s-based k8s cluster)
@@ -216,6 +217,18 @@ spec:
 git add -A
 git commit -m "Sealed Secrets"
 git push
+
+
+#######
+# CIVO Cluster
+#######
+
+# Join cluster to Kubevela
+kubectl get secrets cluster-details-civo-london -o yaml \
+    | yq eval '.data.kubeconfig' - \
+    | base64 -d > civo-london.kubeconfig
+vela cluster join civo-london.kubeconfig # --create-namespace vela-system
+rm civo-london.kubeconfig
 
 ##############
 # KubeVela UX
