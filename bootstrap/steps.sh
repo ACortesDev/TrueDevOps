@@ -218,6 +218,14 @@ git add -A
 git commit -m "Sealed Secrets"
 git push
 
+##############
+# KubeVela UX
+##############
+vela addon enable velaux serviceType=NodePort
+
+vela status addon-velaux -n vela-system --endpoint
+
+kubectl get app.core.oam.dev -n development
 
 #######
 # CIVO Cluster
@@ -229,15 +237,6 @@ kubectl get secrets cluster-details-civo-london -o yaml \
     | base64 -d > civo-london.kubeconfig
 vela cluster join civo-london.kubeconfig # --create-namespace vela-system
 rm civo-london.kubeconfig
-
-##############
-# KubeVela UX
-##############
-#vela addon enable velaux serviceType=NodePort
-
-#vela status addon-velaux -n vela-system --endpoint
-
-kubectl get app.core.oam.dev -n development
 
 # Shutdown
 k3d cluster delete mycluster
