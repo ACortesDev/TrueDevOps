@@ -27,7 +27,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: crossplane-objects
+  name: crossplane-compositions
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
@@ -36,7 +36,55 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: platform-team/gitops/infra
+    path: platform-team/gitops/crossplane/compositions
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-providers
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ACortesDev/k8s-gitops
+    targetRevision: HEAD
+    path: platform-team/gitops/crossplane/providers
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: crossplane-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: crossplane-configs
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ACortesDev/k8s-gitops
+    targetRevision: HEAD
+    path: platform-team/gitops/crossplane/configs
   destination:
     server: https://kubernetes.default.svc
     namespace: crossplane-system
@@ -60,7 +108,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: platform-team/clusters
+    path: platform-team/infra
   destination:
     server: https://kubernetes.default.svc
     namespace: crossplane-system

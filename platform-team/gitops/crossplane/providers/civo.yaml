@@ -1,0 +1,7 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-civo
+  namespace: crossplane-system
+spec:
+  package: crossplane/provider-civo:main
