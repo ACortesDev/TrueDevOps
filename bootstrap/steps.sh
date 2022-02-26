@@ -126,23 +126,23 @@ data:
         --format yaml \
     | tee platform-team/gitops/secrets/civo-provider-secret.yaml
 
-echo "
----
+# echo "
+# ---
 
-apiVersion: civo.crossplane.io/v1alpha1
-kind: ProviderConfig
-metadata:
-  name: civo-config
-  namespace: crossplane-system
-spec:
-  region: lon1
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: civo-provider-secret
-      key: credentials
-" >> platform-team/gitops/secrets/civo-provider-secret.yaml
+# apiVersion: civo.crossplane.io/v1alpha1
+# kind: ProviderConfig
+# metadata:
+#   name: civo-config
+#   namespace: crossplane-system
+# spec:
+#   region: lon1
+#   credentials:
+#     source: Secret
+#     secretRef:
+#       namespace: crossplane-system
+#       name: civo-provider-secret
+#       key: credentials
+# " >> platform-team/gitops/secrets/civo-provider-secret.yaml
 
 
 # echo "apiVersion: v1
