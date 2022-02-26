@@ -118,6 +118,8 @@ kind: Secret
 metadata:
   namespace: crossplane-system
   name: civo-provider-secret
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 type: Opaque
 data:
   credentials: $(echo -n $CIVO_API_KEY | base64)" \
