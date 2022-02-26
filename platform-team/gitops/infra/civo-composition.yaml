@@ -73,7 +73,7 @@ spec:
       apiVersion: helm.crossplane.io/v1beta1
       kind: Release
       spec:
-        rollbackLimit: 3
+        rollbackLimit: 10
         forProvider:
           namespace: vela-system
           chart:

@@ -239,8 +239,7 @@ argocd cluster add product-team-a \
     --yes
 
 # Ensure the Server address is okay in product-teams.yaml
-
-rm product-team-a.kubeconfig
+k get deploy,po -A --kubeconfig product-team-a.kubeconfig
 
 # Shutdown
 k3d cluster delete mycluster
