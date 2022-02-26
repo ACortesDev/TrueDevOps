@@ -38,7 +38,7 @@ spec:
     targetRevision: HEAD
     path: platform-team/self-service/applications
   destination:
-    server: https://kubernetes.default.svc
+    name: product-team-a
     namespace: vela-system
   syncPolicy:
     automated:
