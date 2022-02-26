@@ -230,17 +230,17 @@ git push
 #######
 
 # Join cluster to ArgoCD
-kubectl get secrets cluster-details-civo-london -o yaml \
+kubectl get secrets -n crossplane-system cluster-details-product-team-a -o yaml \
     | yq eval '.data.kubeconfig' - \
-    | base64 -d > civo-london.kubeconfig
+    | base64 -d > product-team-a.kubeconfig
 
-argocd cluster add civo-london \
-    --kubeconfig civo-london.kubeconfig \
+argocd cluster add product-team-a \
+    --kubeconfig product-team-a.kubeconfig \
     --yes
 
 # Ensure the Server address is okay in product-teams.yaml
 
-rm civo-london.kubeconfig
+rm product-team-a.kubeconfig
 
 # Shutdown
 k3d cluster delete mycluster
