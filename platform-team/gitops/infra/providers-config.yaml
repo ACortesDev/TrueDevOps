@@ -1,15 +1,15 @@
-apiVersion: civo.crossplane.io/v1alpha1
-kind: ProviderConfig
-metadata:
-  name: w-config
-  namespace: crossplane-system
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
-spec:
-  region: lon1
-  credentials:
-    source: Secret
-    secretRef:
-      namespace: crossplane-system
-      name: civo-provider-secret
-      key: credentials
+# apiVersion: civo.crossplane.io/v1alpha1
+# kind: ProviderConfig
+# metadata:
+#   name: w-config
+#   namespace: crossplane-system
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "1"
+# spec:
+#   region: lon1
+#   credentials:
+#     source: Secret
+#     secretRef:
+#       namespace: crossplane-system
+#       name: civo-provider-secret
+#       key: credentials
