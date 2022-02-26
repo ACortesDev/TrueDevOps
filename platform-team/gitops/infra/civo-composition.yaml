@@ -1,0 +1,84 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: cluster-civo
+  labels:
+    provider: civo
+    cluster: managed-k3s
+spec:
+  compositeTypeRef:
+    apiVersion: acortes.io/v1wow
+    kind: CompositeCluster
+  writeConnectionSecretsToNamespace: crossplane-system
+  patchSets:
+  - name: metadata
+    patches:
+    - fromFieldPath: metadata.labels
+  resources:
+  - name: civocluster
+    base:
+      apiVersion: cluster.civo.crossplane.io/v1alpha1
+      kind: CivoKubernetes
+      spec:
+        pools:
+        - instances: 1
+          size: g3.k3s.small
+        connectionDetails:
+          connectionSecretNamePrefix: cluster-details
+          connectionSecretNamespace: crossplane-system
+        providerConfigRef:
+          name: civo-config
+    patches:
+    - fromFieldPath: spec.id
+      toFieldPath: metadata.name
+    - fromFieldPath: spec.id
+      toFieldPath: spec.name
+    - fromFieldPath: spec.parameters.minNodeCount
+      toFieldPath: spec.pools[0].instances
+    - fromFieldPath: spec.parameters.nodeSize
+      toFieldPath: spec.pools[0].size
+      transforms:
+        - type: map
+          map:
+            small: g3.k3s.small
+            medium: g3.k3s.medium
+            large: g3.k3s.xlarge
+  - name: helm
+    base:
+      apiVersion: helm.crossplane.io/v1beta1
+      kind: ProviderConfig
+      spec:
+        credentials:
+          source: Secret
+          secretRef:
+            key: kubeconfig
+    patches:
+    - fromFieldPath: spec.id
+      toFieldPath: metadata.name
+    - fromFieldPath: spec.writeConnectionSecretToRef.namespace
+      toFieldPath: spec.credentials.secretRef.namespace
+    - fromFieldPath: spec.id
+      toFieldPath: spec.credentials.secretRef.name
+      transforms:
+        - type: string
+          string:
+            fmt: "cluster-details-%s"
+    readinessChecks:
+      - type: None
+  - name: kubevela
+    base:
+      apiVersion: helm.crossplane.io/v1beta1
+      kind: Release
+      spec:
+        rollbackLimit: 3
+        forProvider:
+          namespace: vela-system
+          chart:
+            name: vela-core
+            repository: https://charts.kubevela.net/core
+            version: "1.2.2"
+    patches:
+    - fromFieldPath: spec.id
+      toFieldPath: metadata.name
+    - fromFieldPath: spec.id
+      toFieldPath: spec.providerConfigRef.name
