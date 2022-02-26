@@ -1,7 +1,7 @@
 apiVersion: civo.crossplane.io/v1alpha1
 kind: ProviderConfig
 metadata:
-  name: civo-config
+  name: w-config
   namespace: crossplane-system
   annotations:
     argocd.argoproj.io/sync-wave: "1"
