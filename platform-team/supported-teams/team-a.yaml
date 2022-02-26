@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: team-a
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: product-teams
+  source:
+    repoURL: https://github.com/ACortesDev/k8s-gitops
+    targetRevision: HEAD
+    path: product-team-A/gitops
+  destination:
+    name: development
+    namespace: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+      allowEmpty: true
+    syncOptions:
+    - CreateNamespace=true

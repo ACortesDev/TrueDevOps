@@ -1,11 +1,11 @@
 apiVersion: acortes.io/v1wow
 kind: CompositeCluster
 metadata:
-  name: product-team-a
+  name: development
   labels:
     cluster-owner: acortesdev
 spec:
-  id: product-team-a
+  id: development
   compositionRef:
     name: cluster-civo
   parameters:

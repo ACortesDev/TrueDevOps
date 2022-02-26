@@ -11,9 +11,7 @@ spec:
   - '*'
   destinations:
   - namespace: '*'
-    server: https://kubernetes.default.svc
-  - namespace: '*'
-    name: '*'
+    name: development
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
@@ -26,23 +24,21 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: team-a
+  name: development-self-service
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: product-teams
+  project: default
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: product-team-A/gitops
+    path: platform-team/self-service/applications
   destination:
-    name: product-team-a
-    namespace: default
+    name: development
+    namespace: vela-system
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
       allowEmpty: true
-    syncOptions:
-    - CreateNamespace=true
