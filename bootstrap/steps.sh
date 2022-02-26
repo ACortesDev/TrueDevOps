@@ -49,6 +49,8 @@ helm upgrade --install \
     --set controller.args.appResyncPeriod=30 \
     --wait
 
+sleep 5
+
 export PASS=$(kubectl \
     --namespace argocd \
     get secret argocd-initial-admin-secret \

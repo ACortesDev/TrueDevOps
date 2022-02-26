@@ -16,7 +16,7 @@ spec:
       - name: server.ingress.enabled
         value: "true"
       - name: server.ingress.hosts
-        value: "{argo-workflows.172.20.0.3.nip.io}"
+        value: "{argo-workflows.172.19.0.3.nip.io}"
       - name: server.extraArgs
         value: "{--auth-mode=server}"
       - name: controller.containerRuntimeExecutor
