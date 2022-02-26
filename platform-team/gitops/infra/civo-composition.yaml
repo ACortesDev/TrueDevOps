@@ -21,7 +21,8 @@ spec:
       kind: CivoKubernetes
       spec:
         pools:
-        - instances: 1
+        - id: ""
+          instances: 1
           size: g3.k3s.small
         connectionDetails:
           connectionSecretNamePrefix: cluster-details
@@ -35,6 +36,12 @@ spec:
       toFieldPath: spec.name
     - fromFieldPath: spec.parameters.minNodeCount
       toFieldPath: spec.pools[0].instances
+    - fromFieldPath: spec.id
+      toFieldPath: spec.pools[0].id
+      transforms:
+        - type: string
+          string:
+            fmt: "%s-nodepool-1"
     - fromFieldPath: spec.parameters.nodeSize
       toFieldPath: spec.pools[0].size
       transforms:
