@@ -6,8 +6,9 @@ Cluster name: `controller-cluster`
 Namespaces:
 
 - `argocd`
-- `kubevela-system`
 - `crossplane-system`
+- `argo`
+- `argo-events`
 
 ## Continuous Integration (CI)
 

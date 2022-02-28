@@ -6,19 +6,14 @@
 #   - k3d (k3s-based k8s cluster)
 #   - argocd (Argo CD cli)
 #   - argo (Argo Workflows cli)
-#   - vela (KubeVela cli)
-#   - kubeseal (bitnami sealed-secrets cli)
-#   - [optional] cue (CUE cli)
-#
-#   - mc (minio cli)
-#
+#   - kubeseal (Bitnami's Sealed-secrets cli)
+#   - cue (CUE cli)
+#   - mc (Minio cli)
 
 ###################################################
 # 1. Get a local cluster to use as a control plane
 ###################################################
 k3d cluster create mycluster
-
-# k3d cluster create -p "8081:80@loadbalancer"
 
 ################################################
 # 2. Get the external IP of the Ingress service
@@ -132,17 +127,9 @@ git add -A
 git commit -m "Sealed Secrets"
 git push
 
-##############
-# KubeVela UX
-##############
-# vela addon enable velaux serviceType=NodePort
-# vela status addon-velaux -n vela-system --endpoint
-# kubectl get app.core.oam.dev -n development
-
-#######
+################
 # CIVO Cluster
-#######
-
+################
 # Join cluster to ArgoCD
 kubectl get secrets -n crossplane-system cluster-details-product-team-a -o yaml \
     | yq eval '.data.kubeconfig' - \
@@ -152,38 +139,10 @@ argocd cluster add product-team-a \
     --kubeconfig product-team-a.kubeconfig \
     --yes
 
-# Ensure the Server address is okay in product-teams.yaml
 k get deploy,po -A --kubeconfig product-team-a.kubeconfig
 
 # Shutdown
 k3d cluster delete mycluster
-
-# TODO:
-- Services (Teams):
-    - Communicate the apps
-        - Pulsar
-            https://pulsar.apache.org/docs/en/kubernetes-helm/
-            https://github.com/apache/pulsar-helm-chart
-
-        - Document with Async API
-    - Play with Prisidio
-
-- Infra party:
-    - Provide a cluster [Civo](https://www.civo.com/pricing)
-        - [Optional] Auto join the cluster to KubeVela:
-            - Declarative? Crossplane Composite?
-    - Deploy apps to the provided cluster
-
-- Argo CD:
-    - Kustomize instead of Helm charts (https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml)
-
-- Argo Events + Workflows:
-    - Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
-    - https://k3d.io/v5.0.0/usage/exposing_services/
-
-- Argo Workflows:
-    - Better workflow that builds, **TESTS** and pushes to DockerHub
-    - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
 
 #######
 # MISC
@@ -192,3 +151,22 @@ kubectl run test \
     --image=alvarocortes/acortes:1.0.0 \
     --image-pull-policy='Always' \
     --rm -it -- /bin/bash
+
+############################
+# TODO:
+# - Infra related:
+#     - Test changing cluster node pool size when already running
+#     - Auto-add crossplane clusters to ArgoCD
+#     - Auto-rm crossplane cluters from ArgoCD
+#
+# - Argo Events + Workflows:
+#     - Build on commit push (https://www.youtube.com/watch?v=XNXJtxkUKeY&t=1088s)
+#     - https://k3d.io/v5.0.0/usage/exposing_services/
+#
+# - Argo Workflows:
+#     - Better workflow that builds, **TESTS** and pushes to DockerHub
+#     - Minio [Helm](https://github.com/minio/minio/tree/master/helm/minio)
+#
+# - Improvements:
+#     - Controllers in their HA version. Kustomize instead of Helm charts (https://raw.githubusercontent.com/argoproj/argo-events/stable/manifests/install.yaml)
+#
