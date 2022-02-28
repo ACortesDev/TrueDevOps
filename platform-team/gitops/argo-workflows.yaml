@@ -46,7 +46,7 @@ spec:
   source:
     repoURL: https://github.com/ACortesDev/k8s-gitops
     targetRevision: HEAD
-    path: platform-team/gitops/pipelines
+    path: platform-team/gitops/workflows
   destination:
     server: https://kubernetes.default.svc
     namespace: argo
